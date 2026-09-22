@@ -1,0 +1,77 @@
+.fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.legend {
+  padding: 0;
+  margin-bottom: var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.track {
+  display: inline-flex;
+  padding: 3px;
+  gap: 2px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface-sunken);
+}
+
+.segment {
+  position: relative;
+  display: flex;
+}
+
+.input {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 3.5rem;
+  min-height: calc(var(--touch-target) - 8px);
+  padding: 0 var(--space-4);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-figures);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition:
+    background-color var(--duration-fast) ease,
+    color var(--duration-fast) ease;
+}
+
+.sm .label {
+  min-width: 3rem;
+  min-height: 2.5rem;
+  padding: 0 var(--space-3);
+  font-size: var(--text-xs);
+}
+
+.input:checked + .label {
+  background: var(--color-text);
+  color: var(--color-surface);
+}
+
+.input:focus-visible + .label {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+@media (forced-colors: active) {
+  .input:checked + .label {
+    background: Highlight;
+    color: HighlightText;
+  }
+}

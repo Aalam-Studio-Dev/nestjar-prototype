@@ -1,0 +1,380 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.aside {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+@media (min-width: 64rem) {
+  .layout {
+    display: grid;
+    grid-template-columns: 19rem 1fr;
+    align-items: start;
+    gap: var(--space-8);
+  }
+
+  .aside {
+    position: sticky;
+    top: var(--space-8);
+  }
+}
+
+/* ---------- Central jar ---------- */
+
+.central {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    'gauge body'
+    'actions actions';
+  align-items: center;
+  column-gap: var(--space-5);
+}
+
+@media (min-width: 64rem) {
+  .central {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'gauge'
+      'body'
+      'actions';
+    justify-items: center;
+    row-gap: var(--space-4);
+    text-align: center;
+  }
+}
+
+.centralGauge {
+  grid-area: gauge;
+}
+
+.centralBody {
+  grid-area: body;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+  flex: 1;
+}
+
+@media (min-width: 64rem) {
+  .centralBody {
+    align-items: center;
+    width: 100%;
+  }
+}
+
+.centralLabel {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.centralLabel:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 4px;
+}
+
+.centralFigure {
+  font-size: clamp(var(--text-2xl), 1rem + 4vw, var(--text-3xl));
+  overflow-wrap: anywhere;
+  line-height: 1.1;
+}
+
+.centralCaption {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.centralActions {
+  grid-area: actions;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-3);
+  width: 100%;
+  margin-top: var(--space-5);
+}
+
+@media (min-width: 64rem) {
+  .centralActions {
+    margin-top: 0;
+  }
+}
+
+.buttonFigure {
+  white-space: nowrap;
+  margin-left: var(--space-1);
+  padding-left: var(--space-2);
+  border-left: 1px solid var(--color-on-honey-divider);
+  font-weight: 600;
+}
+
+.celebrate {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--color-moss-text);
+}
+
+.remainder {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.remainderText {
+  font-size: var(--text-sm);
+}
+
+.remainderChoices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+@media (min-width: 64rem) {
+  .remainderChoices {
+    justify-content: center;
+  }
+}
+
+.quickPick {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--touch-target);
+  padding: 0 var(--space-4);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.quickPick:hover {
+  background: var(--color-surface-sunken);
+}
+
+.quickPick[aria-pressed='true'] {
+  background: var(--color-text);
+  border-color: var(--color-text);
+  color: var(--color-surface);
+}
+
+/* ---------- Stats ---------- */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-2);
+}
+
+.stat {
+  padding: var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+
+.stat dt {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.stat dd {
+  margin-top: var(--space-1);
+  font-size: var(--text-base);
+  overflow-wrap: anywhere;
+}
+
+/* ---------- Groups and jars ---------- */
+
+.groups {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.groupHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2);
+  padding: 0 var(--space-1);
+}
+
+.groupName {
+  font-size: var(--text-lg);
+}
+
+.groupTotal {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  text-align: right;
+}
+
+.jarList {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  overflow: hidden;
+}
+
+.jarList > li + li {
+  border-top: 1px solid var(--color-border);
+}
+
+.jarRow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  width: 100%;
+  padding: var(--space-4);
+  border: 0;
+  background: transparent;
+  text-align: left;
+  transition: background-color var(--duration-fast) ease;
+}
+
+.jarRow:hover {
+  background: var(--color-surface-hover);
+}
+
+.jarRow:focus-visible {
+  outline-offset: -3px;
+  border-radius: 0;
+}
+
+.jarTop {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  grid-template-areas:
+    'name remaining chevron'
+    'badge badge badge';
+  align-items: center;
+  column-gap: var(--space-2);
+  row-gap: var(--space-1);
+}
+
+.jarName {
+  grid-area: name;
+  font-weight: 600;
+}
+
+.jarBadge {
+  grid-area: badge;
+  justify-self: start;
+}
+
+.jarRemaining {
+  grid-area: remaining;
+  font-size: var(--text-base);
+  white-space: nowrap;
+}
+
+.jarRemainingLabel {
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.negative {
+  color: var(--color-berry-text);
+}
+
+.jarChevron {
+  grid-area: chevron;
+  flex-shrink: 0;
+  color: var(--color-text-muted);
+}
+
+.jarFigures {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+}
+
+.jarFigure {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.jarFigureLabel {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+/* ---------- Seed sheet ---------- */
+
+.sheetForm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.sheetFigures {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-sunken);
+}
+
+.sheetFigures dt {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+.sheetFigures dd {
+  font-size: var(--text-sm);
+  overflow-wrap: anywhere;
+}
+
+.quickPicks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: calc(var(--space-2) * -1);
+}
+
+.sheetNote {
+  color: var(--color-text-muted);
+}
+
+.formError {
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-berry-tint);
+  color: var(--color-berry-text);
+  font-weight: 500;
+}

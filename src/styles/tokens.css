@@ -1,0 +1,13 @@
+/*
+ * Design tokens, in three tiers. Each tier only reads the one above it.
+ *
+ *   primitives  raw brand values        --honey-amber
+ *   semantic    what a value is for     --color-honey-text
+ *   components  one component's choice  --button-height-sm
+ *
+ * Modules read semantic and component tokens, never primitives.
+ */
+
+@import './tokens/primitives.css';
+@import './tokens/semantic.css';
+@import './tokens/components.css';

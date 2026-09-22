@@ -1,0 +1,31 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: var(--radius-md);
+  background: var(--color-honey-tint);
+  color: var(--color-honey-text);
+}
+
+.title {
+  font-size: var(--text-xl);
+}
+
+.body {
+  max-width: 34rem;
+  color: var(--color-text-muted);
+}

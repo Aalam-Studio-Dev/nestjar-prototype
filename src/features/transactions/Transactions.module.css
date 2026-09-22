@@ -1,0 +1,181 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.pair {
+  display: grid;
+  gap: var(--space-5);
+}
+
+@media (min-width: 30rem) {
+  .pair {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+
+.formError {
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-berry-tint);
+  color: var(--color-berry-text);
+  font-weight: 500;
+}
+
+/* On phones the primary action floats above the tab bar, thumb-reachable. */
+.fab {
+  position: fixed;
+  z-index: 15;
+  right: var(--space-4);
+  bottom: calc(var(--tab-bar-height) + var(--space-4) + env(safe-area-inset-bottom));
+  min-height: 3.25rem;
+  padding: 0 var(--space-5);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-on-honey-divider);
+}
+
+@media (min-width: 64rem) {
+  .fab {
+    position: static;
+    min-height: var(--touch-target);
+    border-radius: var(--radius-md);
+  }
+}
+
+/* ---------- Activity ---------- */
+
+.days {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.dayTitle {
+  margin-bottom: var(--space-2);
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.columns {
+  display: none;
+}
+
+/*
+ * Phones stack the figures under each other on the right: what was paid,
+ * then the equivalent, then the rate. From 48rem they become columns.
+ */
+.item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    'main paid'
+    'main equivalent'
+    'main rate';
+  column-gap: var(--space-4);
+  row-gap: 2px;
+  padding: var(--space-3) 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.item:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.item:last-child {
+  padding-bottom: 0;
+}
+
+.itemMain {
+  grid-area: main;
+  min-width: 0;
+}
+
+.itemTitle {
+  font-weight: 600;
+}
+
+.itemMeta {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.itemPaid,
+.itemEquivalent,
+.itemRate {
+  justify-self: end;
+  text-align: right;
+}
+
+.itemPaid {
+  grid-area: paid;
+}
+
+.itemEquivalent {
+  grid-area: equivalent;
+  color: var(--color-text-muted);
+}
+
+.itemRate {
+  grid-area: rate;
+}
+
+@media (min-width: 48rem) {
+  .columns,
+  .item {
+    grid-template-columns: minmax(0, 1fr) 7.5rem 9.5rem 7.5rem;
+    column-gap: var(--space-4);
+  }
+
+  .columns {
+    display: grid;
+    padding-bottom: var(--space-2);
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: var(--space-3);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  .columns span:not(:first-child) {
+    text-align: right;
+  }
+
+  .item {
+    grid-template-areas: 'main paid rate equivalent';
+    align-items: start;
+  }
+
+  .itemEquivalent {
+    color: var(--color-text);
+  }
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-8) var(--space-4);
+  text-align: center;
+}
+
+.emptyTitle {
+  font-size: var(--text-lg);
+}
+
+.emptyBody {
+  max-width: 24rem;
+  color: var(--color-text-muted);
+}

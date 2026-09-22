@@ -1,0 +1,477 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-10);
+}
+
+.sectionNav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: calc(var(--space-6) * -1);
+}
+
+/* ---------- Specimen blocks ---------- */
+
+.specimen {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.specimenHead {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  max-width: 42rem;
+}
+
+.specimenTitle {
+  font-size: var(--text-xl);
+}
+
+.specimenIntro,
+.note {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+/* Plex Mono is self-hosted at 500 and 600 only, so code never asks for 400. */
+.page code {
+  font-family: var(--font-figures);
+  font-weight: 500;
+}
+
+.token {
+  font-size: var(--text-xs);
+  color: var(--color-text);
+}
+
+.code {
+  margin: 0;
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-nav);
+  color: var(--color-nav-text);
+  font-size: var(--text-xs);
+  line-height: 1.7;
+  /* Wraps rather than scrolls, so phones never need a sideways scroll area. */
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.rule {
+  padding: var(--space-3) var(--space-4);
+  border-left: 3px solid var(--color-honey);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  background: var(--color-surface);
+  font-size: var(--text-sm);
+}
+
+/* ---------- Colour ---------- */
+
+.swatches {
+  display: grid;
+  gap: var(--space-3);
+}
+
+@media (min-width: 40rem) {
+  .swatches {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 64rem) {
+  .swatches {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.swatch {
+  display: flex;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+
+.swatchChip {
+  flex-shrink: 0;
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+}
+
+.swatchBody {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.swatchBody .token {
+  overflow-wrap: anywhere;
+}
+
+.swatchUse {
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.swatchMeta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+/* ---------- Type ---------- */
+
+.typeFaces {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.faceDisplay {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  line-height: var(--leading-tight);
+}
+
+.faceUi {
+  font-size: var(--text-base);
+}
+
+.scale {
+  display: flex;
+  flex-direction: column;
+}
+
+.scaleRow {
+  display: grid;
+  grid-template-columns: 7rem 5rem 1fr;
+  align-items: baseline;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.scaleRow > span:last-child {
+  font-family: var(--font-display);
+  line-height: 1.1;
+}
+
+/* ---------- Space and shape ---------- */
+
+.spaceGrid {
+  display: grid;
+  gap: var(--space-6);
+}
+
+@media (min-width: 48rem) {
+  .spaceGrid {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+
+.spaceList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.spaceRow {
+  display: grid;
+  grid-template-columns: 7rem 1fr;
+  align-items: center;
+}
+
+.spaceBar {
+  height: var(--space-3);
+  border-radius: 2px;
+  background: var(--color-honey);
+}
+
+.radii {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.radii li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.radiusBox {
+  display: block;
+  width: 4.5rem;
+  height: 3rem;
+  border: 1px solid var(--color-border-strong);
+  background: var(--color-surface);
+}
+
+/* ---------- Motion ---------- */
+
+.motion {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-5);
+}
+
+@media (min-width: 40rem) {
+  .motion {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.motionBody {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.tokenList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  font-size: var(--text-sm);
+}
+
+.tokenList div {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------- Component matrices ---------- */
+
+.matrix {
+  display: flex;
+  flex-direction: column;
+}
+
+.matrixRow {
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--space-4) 0;
+  border-top: 1px solid var(--color-border);
+}
+
+@media (min-width: 48rem) {
+  .matrixRow {
+    grid-template-columns: 12rem 1fr;
+    align-items: center;
+  }
+}
+
+.matrixLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.matrixLabel code {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.matrixCells {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.cards {
+  display: grid;
+  gap: var(--space-3);
+}
+
+@media (min-width: 40rem) {
+  .cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.cardName {
+  font-family: var(--font-figures);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.states {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.stateRow {
+  display: grid;
+  grid-template-columns: 9.5rem 1fr;
+  align-items: center;
+  gap: var(--space-4);
+  max-width: 32rem;
+}
+
+.navDemos {
+  display: grid;
+  gap: var(--space-4);
+}
+
+@media (min-width: 48rem) {
+  .navDemos {
+    grid-template-columns: 1fr 15rem;
+    align-items: start;
+  }
+}
+
+.navTabDemo ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  height: var(--tab-bar-height);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+
+.navSideDemo {
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  background: var(--color-nav);
+}
+
+.navSideDemo ul {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.fields {
+  display: grid;
+  gap: var(--space-5);
+}
+
+@media (min-width: 40rem) {
+  .fields {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+
+.jars {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--space-8);
+}
+
+.jars li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.moneyList li {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-3) 0;
+  font-weight: 600;
+}
+
+.moneyFigures {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+}
+
+.moneyList li + li {
+  border-top: 1px solid var(--color-border);
+}
+
+/* ---------- Notes ---------- */
+
+.notes {
+  display: grid;
+  gap: var(--space-4);
+}
+
+@media (min-width: 48rem) {
+  .notes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.noteCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.noteTitle {
+  font-size: var(--text-lg);
+}
+
+.noteBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  font-size: var(--text-sm);
+}
+
+.noteBody dt {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.layers {
+  display: grid;
+  gap: var(--space-3);
+}
+
+@media (min-width: 48rem) {
+  .layers {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.layer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  height: 100%;
+  font-size: var(--text-sm);
+}
+
+.layerName {
+  font-family: var(--font-figures);
+  font-size: var(--text-base);
+  font-weight: 600;
+}
+
+.layerTest {
+  margin-top: auto;
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--color-border);
+  font-weight: 600;
+}

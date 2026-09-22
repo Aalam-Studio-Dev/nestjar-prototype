@@ -1,0 +1,117 @@
+/*
+ * Tier 2: semantic tokens. Named for the job, not the colour.
+ *
+ * This is the tier screens and components read. Brand values are for fills
+ * and decoration; the *-text variants are for words and control boundaries.
+ */
+
+:root {
+  /* Surfaces */
+  --color-canvas: var(--sage-green);
+  --color-canvas-veil: rgb(234 237 224 / 0.94);
+  --color-surface: var(--warm-ivory);
+  --color-surface-sunken: var(--parchment);
+  --color-surface-hover: rgb(241 236 221 / 0.6);
+  --color-glass: rgb(251 248 240 / 0.6);
+  --color-scrim: rgb(20 24 16 / 0.5);
+
+  /* Text and lines */
+  --color-text: var(--deep-spruce);
+  --color-text-muted: var(--olive-700);
+  --color-border: var(--muted-clay); /* decorative dividers only */
+  --color-border-strong: var(--clay-700); /* input and control boundaries */
+
+  /* Brand accents: a fill, an accessible text variant and a tint for each */
+  --color-honey: var(--honey-amber);
+  --color-honey-hover: var(--honey-600);
+  --color-honey-text: var(--honey-800);
+  --color-honey-tint: var(--honey-300);
+  --color-honey-text-on-tint: var(--honey-850);
+  --color-honey-glow: rgb(243 223 177 / 0.55);
+  --color-on-honey: var(--honey-900);
+  --color-on-honey-divider: rgb(42 32 4 / 0.25);
+  --color-moss: var(--moss-green);
+  --color-moss-text: var(--moss-700);
+  --color-moss-tint: var(--moss-200);
+  --color-berry: var(--muted-berry);
+  --color-berry-text: var(--berry-700);
+  --color-berry-tint: var(--berry-200);
+
+  /* The dark navigation surface */
+  --color-nav: var(--spruce-950);
+  --color-nav-raised: var(--spruce-900);
+  --color-nav-border: var(--spruce-800);
+  --color-nav-text: var(--spruce-100);
+  --color-nav-text-muted: var(--spruce-300);
+
+  /* Focus */
+  --color-focus: var(--deep-spruce);
+  --color-focus-on-dark: var(--honey-amber);
+
+  /* Typography */
+  --font-display: var(--family-fraunces);
+  --font-ui: var(--family-inter);
+  --font-figures: var(--family-plex-mono);
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.375rem;
+  --text-2xl: 1.75rem;
+  --text-3xl: 2.25rem;
+  --text-hero: clamp(2.25rem, 1.6rem + 3vw, 3.25rem);
+
+  --leading-tight: 1.2;
+  --leading-normal: 1.5;
+
+  /* Space (4px grid) */
+  --space-1: var(--scale-4);
+  --space-2: var(--scale-8);
+  --space-3: var(--scale-12);
+  --space-4: var(--scale-16);
+  --space-5: var(--scale-20);
+  --space-6: var(--scale-24);
+  --space-8: var(--scale-32);
+  --space-10: var(--scale-40);
+  --space-12: var(--scale-48);
+
+  /* Shape */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  /* Layout */
+  --touch-target: 2.75rem; /* 44px minimum */
+  --content-max: 45rem;
+  --tab-bar-height: 4.5rem;
+  --top-bar-height: 3.5rem;
+  --side-nav-width: 15rem;
+
+  /*
+   * Breakpoints, for reference. Custom properties cannot be read inside
+   * @media, so modules repeat these values; keep them to this set.
+   *   30rem  two fields side by side
+   *   40rem  large phone, small tablet
+   *   48rem  tablet
+   *   64rem  side navigation
+   */
+
+  /* Motion. Every animation uses these, so reduced motion is one override. */
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+  --duration-slow: 600ms;
+
+  /* The brand guide rules out drop shadows; sheets use a hairline lift only. */
+  --elevation-sheet: 0 -1px 0 var(--color-border);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration-base: 0ms;
+    --duration-slow: 0ms;
+  }
+}

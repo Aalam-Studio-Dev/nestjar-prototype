@@ -1,0 +1,110 @@
+.item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  font-weight: 500;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.pill {
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  transition:
+    background-color var(--duration-fast) ease,
+    border-color var(--duration-fast) ease;
+}
+
+.lock {
+  position: absolute;
+  top: 2px;
+  right: 6px;
+}
+
+/* ---------- Tab: icon above label, a fixed-size pill around the icon ---------- */
+
+.tab {
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-1);
+  height: 100%;
+  padding-block: var(--space-2);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+.tab .pill {
+  width: var(--nav-pill-width);
+  height: var(--nav-pill-height);
+}
+
+.tab:hover .pill {
+  background: var(--color-surface-sunken);
+}
+
+.tab:focus-visible {
+  outline-offset: -4px;
+}
+
+.tab.active {
+  color: var(--color-text);
+  font-weight: 700;
+}
+
+.tab.active .pill {
+  background: var(--color-honey-tint);
+  border-color: var(--color-honey-text);
+}
+
+/* ---------- Side: a full row on the dark rail ---------- */
+
+.side {
+  gap: var(--space-3);
+  min-height: var(--touch-target);
+  padding: 0 var(--space-3) 0 var(--space-1);
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  font-size: var(--text-sm);
+  color: var(--color-nav-text-muted);
+}
+
+.side .pill {
+  width: 2.25rem;
+  height: 2.25rem;
+}
+
+.side .label {
+  flex: 1;
+}
+
+.side:hover {
+  background: var(--color-nav-raised);
+  color: var(--color-nav-text);
+}
+
+.side:focus-visible {
+  outline-color: var(--color-focus-on-dark);
+}
+
+.side.active {
+  background: var(--color-nav-raised);
+  border-color: var(--color-honey);
+  color: var(--color-nav-text);
+  font-weight: 600;
+}
+
+.side.active .pill {
+  background: var(--color-honey);
+  color: var(--color-on-honey);
+}
+
+@media (forced-colors: active) {
+  .active .pill,
+  .side.active {
+    border-color: Highlight;
+  }
+}

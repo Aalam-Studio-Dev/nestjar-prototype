@@ -1,0 +1,172 @@
+.button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--button-height-md);
+  padding: var(--space-2) var(--space-5);
+  border: 1px solid transparent;
+  border-radius: var(--button-radius);
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  transition:
+    background-color var(--duration-fast) ease,
+    border-color var(--duration-fast) ease,
+    transform var(--duration-fast) ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Labels may wrap on narrow screens or at high zoom rather than overflow. */
+.label {
+  min-width: 0;
+}
+
+.button:active:not([aria-busy='true'], :disabled) {
+  transform: translateY(1px);
+}
+
+.button[aria-busy='true'] {
+  cursor: progress;
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+/* ---------- Sizes ---------- */
+
+/*
+ * Small buttons are visually compact but keep a 44px hit area through a
+ * transparent extension, so they still meet the touch target size.
+ */
+.sm {
+  min-height: var(--button-height-sm);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-xs);
+}
+
+.sm::after {
+  content: '';
+  position: absolute;
+  inset: calc((var(--button-height-sm) - var(--touch-target)) / 2);
+}
+
+.lg {
+  min-height: var(--button-height-lg);
+  padding: var(--space-2) var(--space-6);
+  border-radius: var(--radius-lg);
+  font-size: var(--text-base);
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+/* ---------- Icon only: square, same heights as the labelled sizes ---------- */
+
+.iconOnly {
+  padding: 0;
+  aspect-ratio: 1;
+}
+
+.iconOnly.sm {
+  width: var(--button-height-sm);
+}
+
+.iconOnly.md {
+  width: var(--button-height-md);
+}
+
+.iconOnly.lg {
+  width: var(--button-height-lg);
+}
+
+.tooltip {
+  position: absolute;
+  z-index: 30;
+  bottom: calc(100% + var(--space-2));
+  left: 50%;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  background: var(--color-text);
+  color: var(--color-surface);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, 2px);
+  transition:
+    opacity var(--duration-fast) ease,
+    transform var(--duration-fast) ease;
+}
+
+.iconOnly:hover .tooltip,
+.iconOnly:focus-visible .tooltip {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* ---------- Variants ---------- */
+
+.primary {
+  background: var(--color-honey);
+  color: var(--color-on-honey);
+}
+
+.primary:hover:not(:disabled) {
+  background: var(--color-honey-hover);
+}
+
+.secondary {
+  background: var(--color-surface);
+  border-color: var(--color-border-strong);
+  color: var(--color-text);
+}
+
+.secondary:hover:not(:disabled) {
+  background: var(--color-surface-sunken);
+}
+
+/*
+ * No chrome until hovered: for quiet, utility actions. It takes its colour
+ * from its surroundings, so it works on light cards and the dark toast alike.
+ */
+.ghost {
+  background: transparent;
+  color: inherit;
+}
+
+.ghost:not(.iconOnly) {
+  padding-inline: var(--space-3);
+}
+
+.ghost:hover:not(:disabled) {
+  background: color-mix(in srgb, currentColor 8%, transparent);
+}
+
+.danger {
+  background: var(--color-berry);
+  color: var(--color-surface);
+}
+
+.danger:hover:not(:disabled) {
+  background: var(--color-berry-text);
+}
+
+@media (forced-colors: active) {
+  .button {
+    border-color: ButtonText;
+  }
+
+  .tooltip {
+    border: 1px solid CanvasText;
+  }
+}

@@ -1,0 +1,108 @@
+.region {
+  position: fixed;
+  z-index: 50;
+  left: var(--space-4);
+  right: var(--space-4);
+  bottom: calc(var(--toast-offset, var(--space-4)) + env(safe-area-inset-bottom));
+  transition: bottom var(--duration-base) ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+}
+
+/* Hiding an empty live region would stop it announcing, so only space it. */
+.stack:not(:empty) + .stack:not(:empty) {
+  margin-top: var(--space-2);
+}
+
+.toast {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  max-width: 26rem;
+  padding: var(--space-2) var(--space-2) var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-text);
+  color: var(--color-surface);
+  pointer-events: auto;
+  animation: enter var(--duration-base) var(--ease-out);
+}
+
+.icon {
+  flex-shrink: 0;
+}
+
+.success .icon {
+  color: var(--color-honey);
+}
+
+.error .icon {
+  color: var(--color-berry-tint);
+}
+
+.info .icon {
+  color: var(--color-nav-text-muted);
+}
+
+.message {
+  flex: 1;
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+.dismiss {
+  flex-shrink: 0;
+}
+
+.dismiss:focus-visible {
+  outline-color: var(--color-focus-on-dark);
+}
+
+/* A hairline that drains as the toast's time runs out. */
+.timer {
+  position: absolute;
+  left: var(--radius-md);
+  right: var(--radius-md);
+  bottom: 0;
+  height: 2px;
+  background: var(--color-honey);
+  transform-origin: left;
+  animation: drain linear forwards;
+}
+
+@keyframes drain {
+  to {
+    transform: scaleX(0);
+  }
+}
+
+/* The timer still runs under reduced motion; only its moving line goes. */
+@media (prefers-reduced-motion: reduce) {
+  .timer {
+    display: none;
+  }
+}
+
+@keyframes enter {
+  from {
+    transform: translateY(0.75rem);
+    opacity: 0;
+  }
+}
+
+@media (forced-colors: active) {
+  .toast {
+    border: 1px solid CanvasText;
+  }
+}

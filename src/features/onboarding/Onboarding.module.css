@@ -1,0 +1,167 @@
+.layout {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.skipLink {
+  position: fixed;
+  z-index: 100;
+  top: var(--space-2);
+  left: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-text);
+  color: var(--color-surface);
+  font-weight: 600;
+  text-decoration: none;
+  transform: translateY(-200%);
+}
+
+.skipLink:focus-visible {
+  transform: none;
+  outline-color: var(--color-focus-on-dark);
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  height: var(--top-bar-height);
+  padding: 0 var(--space-4);
+}
+
+.main {
+  flex: 1;
+  width: 100%;
+  max-width: 32rem;
+  margin: 0 auto;
+  padding: var(--space-4) var(--space-4) var(--space-12);
+}
+
+.main:focus {
+  outline: none;
+}
+
+.wide {
+  max-width: 64rem;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+/* ---------- Welcome ---------- */
+
+.hero {
+  display: grid;
+  gap: var(--space-8);
+  align-items: center;
+  padding: var(--space-6) 0 var(--space-10);
+}
+
+.heroText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-5);
+}
+
+.lede {
+  max-width: 34rem;
+  font-size: var(--text-lg);
+  color: var(--color-text-muted);
+}
+
+.heroCta {
+  margin-top: var(--space-2);
+}
+
+.signedIn {
+  max-width: 30rem;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.heroArt {
+  display: flex;
+  justify-content: center;
+  order: -1;
+}
+
+@media (min-width: 48rem) {
+  .hero {
+    grid-template-columns: 1.4fr 1fr;
+    padding-top: var(--space-12);
+  }
+
+  .heroArt {
+    order: 0;
+  }
+}
+
+.points {
+  padding-top: var(--space-8);
+  border-top: 1px solid var(--color-border);
+}
+
+.pointList {
+  display: grid;
+  gap: var(--space-6);
+}
+
+@media (min-width: 48rem) {
+  .pointList {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.point {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.pointIcon {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-bottom: var(--space-1);
+  border-radius: var(--radius-md);
+  background: var(--color-honey-tint);
+  color: var(--color-honey-text);
+}
+
+.pointTitle {
+  font-size: var(--text-lg);
+}
+
+.pointBody {
+  color: var(--color-text-muted);
+}
+
+/* ---------- Forms ---------- */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.fieldNote {
+  margin-top: calc(var(--space-3) * -1);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.formError {
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-berry-tint);
+  color: var(--color-berry-text);
+  font-weight: 500;
+}

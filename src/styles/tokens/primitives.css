@@ -1,0 +1,60 @@
+/*
+ * Tier 1: primitives. The raw values from the nestjar brand guide (v1.2).
+ *
+ * Nothing outside src/styles/tokens reads these directly. They exist so the
+ * semantic tier has one place to point at, and so a rebrand is a change here
+ * rather than a hunt through every module.
+ */
+
+:root {
+  /* Brand palette */
+  --sage-green: #eaede0;
+  --warm-ivory: #fbf8f0;
+  --parchment: #f1ecdd;
+  --muted-clay: #d9d3bc;
+  --deep-spruce: #24301f;
+  --muted-olive: #6e7863;
+  --honey-amber: #dca23c;
+  --moss-green: #5c7a52;
+  --muted-berry: #96524f;
+
+  /*
+   * Accessible derivatives. Where a brand colour fails WCAG 2.2 AA for text or
+   * control boundaries, a darker sibling sits here. Ratios are measured against
+   * warm ivory unless noted; see docs/accessibility.md.
+   */
+  --olive-700: #5e6857; /* 4.9:1 on sage */
+  --clay-700: #8a8468; /* 3.5:1, control boundaries */
+  --honey-300: #f3dfb1;
+  --honey-600: #cf9530;
+  --honey-800: #8a5f12; /* 5.3:1 */
+  --honey-850: #7c5a14; /* 4.8:1 on honey-300 */
+  --honey-900: #2a2004;
+  --moss-200: #dce6d4;
+  --moss-700: #4f6a46; /* 5.7:1 */
+  --berry-200: #ebdad6;
+  --berry-700: #86443f;
+
+  /* The dark navigation surface, stepped from deep spruce. */
+  --spruce-950: #212a1d;
+  --spruce-900: #2e3927;
+  --spruce-800: #3a4632;
+  --spruce-100: #e8e4d3;
+  --spruce-300: #a9b59b;
+
+  /* Type families */
+  --family-fraunces: 'Fraunces Variable', 'Fraunces', Georgia, serif;
+  --family-inter: 'Inter Variable', 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --family-plex-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  /* Scales */
+  --scale-4: 0.25rem;
+  --scale-8: 0.5rem;
+  --scale-12: 0.75rem;
+  --scale-16: 1rem;
+  --scale-20: 1.25rem;
+  --scale-24: 1.5rem;
+  --scale-32: 2rem;
+  --scale-40: 2.5rem;
+  --scale-48: 3rem;
+}

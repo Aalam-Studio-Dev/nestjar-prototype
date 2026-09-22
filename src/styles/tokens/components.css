@@ -1,0 +1,31 @@
+/*
+ * Tier 3: component tokens. The decisions a single component makes, named
+ * so they can be tuned in one place and read on the System page.
+ */
+
+:root {
+  /* Button */
+  --button-height-sm: 2.25rem;
+  --button-height-md: var(--touch-target);
+  --button-height-lg: 3.25rem;
+  --button-radius: var(--radius-md);
+
+  /* Card: the brand guide's 16px radius, 24px padding, 1px clay border */
+  --card-radius: var(--radius-lg);
+  --card-padding: var(--space-6);
+  --card-padding-dense: var(--space-4);
+
+  /* Progress track */
+  --track-height: 8px;
+  --track-hatch: repeating-linear-gradient(-45deg, var(--color-border) 0 3px, transparent 3px 6px);
+
+  /* Navigation: the active pill sits around the icon, never full width */
+  --nav-pill-width: 3.5rem;
+  --nav-pill-height: 2rem;
+
+  /*
+   * Toast. A plain number of milliseconds so the provider can read it.
+   * Reduced motion does not shorten it: time to read is not animation.
+   */
+  --toast-duration: 3000;
+}

@@ -1,0 +1,16 @@
+.tip {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--radius-md);
+  background: var(--color-honey-glow);
+  font-size: var(--text-sm);
+}
+
+.icon {
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+  color: var(--color-honey-text);
+}

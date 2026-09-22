@@ -1,0 +1,82 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.totals {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+}
+
+@media (min-width: 48rem) {
+  .totals {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.totals dt {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.totals dd {
+  font-size: var(--text-xl);
+  overflow-wrap: anywhere;
+}
+
+.sectionTitle {
+  margin-bottom: var(--space-3);
+  font-size: var(--text-lg);
+}
+
+.shelf {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr));
+  gap: var(--space-4) var(--space-3);
+  padding: var(--space-5) var(--space-4);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-bottom: 6px solid var(--color-border);
+}
+
+.shelfItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  text-align: center;
+}
+
+.shelfName {
+  margin-top: var(--space-1);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.shelfFigure {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.nextIntro {
+  color: var(--color-text-muted);
+}
+
+.nextList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+  padding-left: var(--space-5);
+  list-style: disc;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}

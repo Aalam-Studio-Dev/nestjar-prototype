@@ -1,0 +1,33 @@
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.mark {
+  display: block;
+  flex-shrink: 0;
+}
+
+.wordmark {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.dark {
+  color: var(--color-text);
+}
+
+/* The mark is dark spruce line art; on dark surfaces it sits on an ivory disc. */
+.light {
+  color: var(--color-nav-text);
+}
+
+.light .mark {
+  padding: 3px 5px;
+  box-sizing: content-box;
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+}

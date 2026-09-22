@@ -1,0 +1,66 @@
+.jar {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.glass {
+  fill: var(--color-glass);
+}
+
+.liquid {
+  fill: var(--color-honey);
+  transition: transform var(--duration-slow) var(--ease-out);
+}
+
+/* Clipped to the inside, so only the inner half of this stroke shows. */
+.gap {
+  fill: none;
+  stroke: var(--color-surface);
+  stroke-width: 8;
+}
+
+.outline {
+  fill: none;
+  stroke: var(--color-text);
+  stroke-width: 2.1;
+  stroke-linejoin: round;
+}
+
+.sheen {
+  fill: none;
+  stroke: var(--color-text);
+  stroke-width: 1.9;
+  stroke-linecap: round;
+}
+
+.rim {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  user-select: none;
+}
+
+@media (forced-colors: active) {
+  .liquid {
+    fill: Highlight;
+  }
+
+  .gap {
+    stroke: Canvas;
+  }
+
+  .outline,
+  .sheen {
+    stroke: CanvasText;
+  }
+}
