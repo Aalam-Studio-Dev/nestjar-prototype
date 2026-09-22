@@ -98,4 +98,4 @@ React 19, TypeScript, Vite, React Router, TanStack Query, CSS Modules with desig
 
 ---
 
-Designed and engineered by Sadi at Aalam Studio.
+Designed and engineered by Sadiyo Hassan at Aalam Studio.
