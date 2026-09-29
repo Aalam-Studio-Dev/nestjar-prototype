@@ -35,7 +35,7 @@ npm run dev        # http://localhost:5173
 | `npm run test:e2e` | Keyboard-only walkthrough of the happy path with axe scans, on phone and desktop viewports. |
 | `npm run build`    | Static build into `dist/`.                                                                  |
 
-Open the **Demo** menu at any time to restart the story, hide the presenter tips or open the **Design notes** (`/system`): the design system and the decisions behind the prototype. They are also a panel in the app's navigation.
+Open the **Demo** menu at any time to restart the story, hide the presenter tips or open the **Design notes** (`/system`): the design principles, and the design system that puts them into practice. They are also a panel in the app's navigation.
 
 ### Vite, Vercel and Cloudflare
 
@@ -62,9 +62,9 @@ Vite is the build tool: it runs the dev server and bundles the app into static f
 - Brand colours that failed WCAG AA were given accessible variants for text and control borders, and the ratios are documented.
 - Forced-colours (Windows High Contrast) mode is styled explicitly.
 
-**Design system** (live at `/system`)
+**Design System** (live at `/system/design-system`, after the principles at `/system`)
 
-- Tokens in three tiers: primitives, semantic and component. Screens never hard-code a colour.
+- Two style layers: `brand.css` holds the brand guide's values and `shared.css` names what each is for. Values unique to one component live in its own module. Screens never hard-code a colour.
 - One configurable Button, and primitives that emit events rather than deciding behaviour.
 - ESLint enforces the layers: `ui/` cannot import nestjar code, and `components/` cannot fetch data.
 

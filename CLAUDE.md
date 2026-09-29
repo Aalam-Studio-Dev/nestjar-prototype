@@ -34,9 +34,10 @@ nestjar-prototype is a front-end-only, portfolio-grade prototype of nestjar: zer
 - Native elements only for interaction: `<button>`, `<a>`, `<input>`, `<select>`, `<dialog>`. No clickable `<div>`.
 - Every page renders exactly one `PageHeading`; it sets `document.title` and receives focus on navigation.
 - When an action removes the control that triggered it, move focus somewhere stable before or after (see `data-focus-fallback`).
-- Colours come from the semantic tokens (`styles/tokens/semantic.css`), never primitives or raw hex. Use the `*-text` variants for text; brand values are for fills.
+- Styles come from `styles/shared.css`, never `styles/brand.css` or raw hex. Use the `*-text` variants for text; brand fills are for fills.
+- A value goes in `shared.css` when other components are meant to match it (focus, touch target, colour roles), even if only one uses it today. A value only one component cares about stays in that component's module, as a local custom property if its variants change it.
 - Mobile first: write base styles for phones, then add `min-width` queries (40rem, 48rem, 64rem).
-- Every animation uses the duration tokens, so reduced motion is respected automatically.
+- Every animation uses the shared durations, so reduced motion is respected automatically.
 - State is never conveyed by colour alone.
 
 ## Writing style

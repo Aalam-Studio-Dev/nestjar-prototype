@@ -1,13 +1,16 @@
 .button {
+  /* The one value each size changes. Medium matches fields, so they line up. */
+  --button-height: var(--touch-target);
+
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: var(--space-2);
-  min-height: var(--button-height-md);
+  min-height: var(--button-height);
   padding: var(--space-2) var(--space-5);
   border: 1px solid transparent;
-  border-radius: var(--button-radius);
+  border-radius: var(--radius-md);
   font-family: var(--font-ui);
   font-size: var(--text-sm);
   font-weight: 600;
@@ -46,7 +49,8 @@
  * transparent extension, so they still meet the touch target size.
  */
 .sm {
-  min-height: var(--button-height-sm);
+  --button-height: 2.25rem;
+
   padding: var(--space-1) var(--space-3);
   border-radius: var(--radius-sm);
   font-size: var(--text-xs);
@@ -55,11 +59,12 @@
 .sm::after {
   content: '';
   position: absolute;
-  inset: calc((var(--button-height-sm) - var(--touch-target)) / 2);
+  inset: calc((var(--button-height) - var(--touch-target)) / 2);
 }
 
 .lg {
-  min-height: var(--button-height-lg);
+  --button-height: 3.25rem;
+
   padding: var(--space-2) var(--space-6);
   border-radius: var(--radius-lg);
   font-size: var(--text-base);
@@ -72,20 +77,9 @@
 /* ---------- Icon only: square, same heights as the labelled sizes ---------- */
 
 .iconOnly {
+  width: var(--button-height);
   padding: 0;
   aspect-ratio: 1;
-}
-
-.iconOnly.sm {
-  width: var(--button-height-sm);
-}
-
-.iconOnly.md {
-  width: var(--button-height-md);
-}
-
-.iconOnly.lg {
-  width: var(--button-height-lg);
 }
 
 .tooltip {

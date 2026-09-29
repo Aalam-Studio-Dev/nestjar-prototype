@@ -22,9 +22,11 @@ The mock adapter mirrors the database: rows, transactions, constraint checks, la
 
 `<dialog>` for sheets, radio inputs for the segmented control, `<select>` for pickers, a checkbox for the switch. Native elements bring keyboard support, focus management and screen reader semantics that custom widgets have to recreate and usually get subtly wrong.
 
-## 6. CSS Modules and tokens, no utility framework
+## 6. CSS Modules and shared styles, no utility framework
 
-The brand guide is a small, strict system. Tokens as custom properties plus scoped modules keep that system legible in the code, avoid a styling runtime, and make forced-colours and reduced-motion overrides straightforward.
+The brand guide is a small, strict system. Shared custom properties plus scoped modules keep that system legible in the code, avoid a styling runtime, and make forced-colours and reduced-motion overrides straightforward.
+
+There are two layers, not three. `brand.css` holds the brand guide's values and only `shared.css` reads it. `shared.css` holds anything components are meant to agree on. A value unique to one component lives in that component's module, so a global file never fills up with one-off details.
 
 ## 7. Locked paths are visible
 
@@ -44,4 +46,4 @@ A toast either closes itself after 3 seconds or stays until closed (`persistent`
 
 ## 11. Design notes beside the story
 
-Reviewers see the running app far more often than the repository. `/system` shows the design system from the real components and the reasoning behind the prototype. It is open at every stage. Once the month is running it is a panel in the navigation; before that it opens on its own and leads back to wherever you were, so it sits beside the happy path without breaking it.
+Reviewers see the running app far more often than the repository. `/system` opens on the design principles, then the design system shows them in practice: built from the real components, with each part naming the principle it serves. It is open at every stage. Once the month is running it is a panel in the navigation; before that it opens on its own and leads back to wherever you were, so it sits beside the happy path without breaking it.

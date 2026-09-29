@@ -7,7 +7,7 @@ import { SetupPage } from '@/features/onboarding/SetupPage';
 import { WelcomePage } from '@/features/onboarding/WelcomePage';
 import { MonthReviewPage } from '@/features/review/MonthReviewPage';
 import { DesignSystemPage } from '@/features/system/DesignSystemPage';
-import { NotesPage } from '@/features/system/NotesPage';
+import { PrinciplesPage } from '@/features/system/PrinciplesPage';
 import { ActivityPage } from '@/features/transactions/ActivityPage';
 import { AppShell } from './AppShell/AppShell';
 import { DesignNotesShell } from './DesignNotesShell';
@@ -103,8 +103,10 @@ export const routes: RouteObject[] = [
           </StageGate>
         ),
         children: [
-          { index: true, element: <DesignSystemPage /> },
-          { path: 'notes', element: <NotesPage /> },
+          { index: true, element: <PrinciplesPage /> },
+          { path: 'design-system', element: <DesignSystemPage /> },
+          // The decisions now live beside the principles they apply.
+          { path: 'notes', element: <Navigate to="/system" replace /> },
         ],
       },
       { path: '*', element: <NotFoundPage /> },

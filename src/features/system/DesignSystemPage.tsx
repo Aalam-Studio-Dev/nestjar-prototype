@@ -1,4 +1,4 @@
-import { ArrowRight, BookOpen, Palette, Plus, Sprout, Trash2, X } from 'lucide-react';
+import { ArrowRight, Palette, PiggyBank, Plus, Settings, Sprout, Trash2, X } from 'lucide-react';
 import { useState } from 'react';
 import { JarGauge } from '@/components/JarGauge/JarGauge';
 import { JarProgress, JarStateBadge } from '@/components/JarState/JarState';
@@ -19,10 +19,10 @@ import {
   useToast,
   type ButtonVariant,
 } from '@/ui';
-import { Specimen, SystemHeader } from './SystemLayout';
+import { Part, Specimen, SystemHeader } from './SystemLayout';
 import styles from './System.module.css';
 
-/* ---------- Tokens ---------- */
+/* ---------- Foundations ---------- */
 
 type SwatchKind = 'text' | 'line' | 'fill' | 'surface';
 
@@ -77,7 +77,6 @@ function SwatchCard({ swatch }: { readonly swatch: Swatch }) {
     <li className={styles.swatch}>
       <span className={styles.swatchChip} style={{ background: `var(${swatch.token})` }} />
       <span className={styles.swatchBody}>
-        <code className={styles.token}>{swatch.token}</code>
         <span className={styles.swatchUse}>{swatch.use}</span>
         <span className={styles.swatchMeta}>
           <span className="figures">{value}</span>
@@ -96,30 +95,31 @@ function SwatchCard({ swatch }: { readonly swatch: Swatch }) {
 }
 
 const TYPE_SCALE = [
-  ['--text-3xl', '2.25rem'],
-  ['--text-2xl', '1.75rem'],
-  ['--text-xl', '1.375rem'],
-  ['--text-lg', '1.125rem'],
-  ['--text-base', '1rem'],
-  ['--text-sm', '0.875rem'],
-  ['--text-xs', '0.75rem'],
+  ['--text-3xl', '36px'],
+  ['--text-2xl', '28px'],
+  ['--text-xl', '22px'],
+  ['--text-lg', '18px'],
+  ['--text-base', '16px'],
+  ['--text-sm', '14px'],
+  ['--text-xs', '12px'],
 ] as const;
 
-const SPACE = ['1', '2', '3', '4', '5', '6', '8', '10', '12'] as const;
-const RADII = ['sm', 'md', 'lg', 'pill'] as const;
+const SPACE = [1, 2, 3, 4, 5, 6, 8, 10, 12] as const;
+const RADII = [
+  ['sm', 'Small, 8px'],
+  ['md', 'Medium, 12px'],
+  ['lg', 'Large, 16px'],
+  ['pill', 'Pill'],
+] as const;
 
-/* ---------- Components ---------- */
+/* ---------- Patterns ---------- */
 
-const VARIANTS: readonly { variant: ButtonVariant; use: string }[] = [
-  { variant: 'primary', use: 'The one main action on a screen.' },
-  { variant: 'secondary', use: 'An alternative to the main action.' },
-  { variant: 'ghost', use: 'Quiet, utility actions. No chrome until hovered.' },
-  { variant: 'danger', use: 'Actions that destroy something.' },
+const VARIANTS: readonly { variant: ButtonVariant; name: string; use: string }[] = [
+  { variant: 'primary', name: 'Primary', use: 'The one main action on a screen.' },
+  { variant: 'secondary', name: 'Secondary', use: 'An alternative to the main action.' },
+  { variant: 'ghost', name: 'Quiet', use: 'Utility actions. No outline until hovered.' },
+  { variant: 'danger', name: 'Danger', use: 'Actions that remove something.' },
 ];
-
-const BUTTON_EXAMPLE = `<Button label="Log spend" icon={<Plus />} onClick={openSheet} />
-<Button label="Back to budget" icon={<ArrowLeft />} href="/budget" variant="secondary" />
-<Button label="Dismiss" icon={<X />} iconOnly variant="ghost" onClick={close} />`;
 
 const JAR_STATES: readonly {
   state: JarState;
@@ -137,22 +137,18 @@ function ButtonSpecimen() {
   const [busy, setBusy] = useState(false);
   return (
     <>
-      <pre className={styles.code}>
-        <code>{BUTTON_EXAMPLE}</code>
-      </pre>
       <div className={styles.rule}>
         <p>
-          <strong>href or onClick?</strong> If pressing it goes to another page, give it an{' '}
-          <code>href</code>: it renders a real link that can open in a new tab. If it changes
-          something, give it an <code>onClick</code>. The button never decides what happens; the
-          screen using it does.
+          <strong>Going somewhere, or doing something?</strong> If pressing it goes to another page,
+          it is a real link that can open in a new tab. If it changes something, it is an action.
+          Either way it looks the same, and the screen decides what a press does.
         </p>
       </div>
       <ul className={styles.matrix}>
-        {VARIANTS.map(({ variant, use }) => (
+        {VARIANTS.map(({ variant, name, use }) => (
           <li key={variant} className={styles.matrixRow}>
             <p className={styles.matrixLabel}>
-              <code>{variant}</code>
+              <strong>{name}</strong>
               <span>{use}</span>
             </p>
             <div className={styles.matrixCells}>
@@ -185,8 +181,8 @@ function ButtonSpecimen() {
         ))}
         <li className={styles.matrixRow}>
           <p className={styles.matrixLabel}>
-            <code>size</code>
-            <span>Small keeps a 44px hit area around a compact face.</span>
+            <strong>Sizes</strong>
+            <span>Small looks compact but keeps a full-size area to press.</span>
           </p>
           <div className={styles.matrixCells}>
             <Button size="sm" label="Small" />
@@ -198,8 +194,8 @@ function ButtonSpecimen() {
         </li>
         <li className={styles.matrixRow}>
           <p className={styles.matrixLabel}>
-            <code>states</code>
-            <span>Loading keeps focus and announces busy. Disabled is a last resort.</span>
+            <strong>States</strong>
+            <span>Loading keeps your place and says it is busy. Disabled is a last resort.</span>
           </p>
           <div className={styles.matrixCells}>
             <Button
@@ -212,7 +208,7 @@ function ButtonSpecimen() {
               }}
             />
             <Button variant="secondary" label="Disabled" disabled />
-            <Button variant="secondary" label="A link" href="/system/notes" />
+            <Button variant="secondary" label="A link" href="/system" />
           </div>
         </li>
       </ul>
@@ -231,7 +227,7 @@ function FieldSpecimen() {
         currency={currency}
         value={amount}
         onValueChange={setAmount}
-        hint="Speaks integer minor units: 60 becomes 6000."
+        hint="Type it as it reads on your statement."
       />
       <SelectField
         label="Paid from"
@@ -307,28 +303,18 @@ function MotionSpecimen() {
       <div className={styles.motionBody}>
         <dl className={styles.tokenList}>
           <div>
-            <dt>
-              <code>--duration-fast</code>
-            </dt>
-            <dd>120ms. Hovers and presses.</dd>
+            <dt>Quick, 120ms</dt>
+            <dd>Hovers and presses.</dd>
           </div>
           <div>
-            <dt>
-              <code>--duration-base</code>
-            </dt>
-            <dd>200ms. Sheets and toasts arriving.</dd>
+            <dt>Steady, 200ms</dt>
+            <dd>Sheets and messages arriving.</dd>
           </div>
           <div>
-            <dt>
-              <code>--duration-slow</code>
-            </dt>
-            <dd>600ms. Honey settling to a new level.</dd>
+            <dt>Slow, 600ms</dt>
+            <dd>Honey settling to a new level.</dd>
           </div>
         </dl>
-        <p className={styles.note}>
-          Every animation reads these tokens. Under reduced motion they become 0ms, so the jar still
-          changes level, just without the pour.
-        </p>
         <Button
           variant="secondary"
           label={full ? 'Seed it out' : 'Pour it back'}
@@ -344,249 +330,303 @@ export function DesignSystemPage() {
   return (
     <div className={styles.page}>
       <SystemHeader
-        title="Design system"
-        description="The tokens and components every screen is built from. Everything here is the real code, not a picture of it."
+        title="Design System"
+        description="How the principles look in practice. Every example here is the live component, not a picture of it."
       />
 
-      <Specimen
-        id="ds-principles"
-        title="Three tiers of tokens"
-        intro="Primitives hold the brand's raw values. Semantic tokens name a job. Component tokens hold one component's choices. Screens only read the last two, so a rebrand is a change in one file."
-      >
-        <pre className={styles.code}>
-          <code>{`/* primitive: a raw brand value */
---honey-amber: #dca23c;
+      <Part id="ds-foundations" title="Foundations" intro="The brand, made to work for everyone.">
+        <Specimen
+          id="ds-colour"
+          level={3}
+          title="Colour"
+          principles={['accessibility', 'details', 'architecture']}
+          intro="Brand colours fill, stronger partners speak. Where a brand colour is too light for text, a darker partner carries the words. Screens only ever ask for a colour's job, never its value, so a rebrand is a change in one place."
+        >
+          <ul className={styles.swatches}>
+            {SWATCHES.map((swatch) => (
+              <SwatchCard key={swatch.token} swatch={swatch} />
+            ))}
+          </ul>
+        </Specimen>
 
-/* semantic: named for the job */
---color-honey: var(--honey-amber);
---color-honey-text: var(--honey-800);
+        <Specimen
+          id="ds-type"
+          level={3}
+          title="Type"
+          principles={['details']}
+          intro="Three voices: Fraunces for moments, Inter for reading and IBM Plex Mono for figures, so money lines up digit for digit."
+        >
+          <Card>
+            <div className={styles.typeFaces}>
+              <p className={styles.faceDisplay}>Every pound has a job.</p>
+              <p className={styles.faceUi}>
+                Seed money from the central jar into the jars that need it.
+              </p>
+              <p className="figures">£5,758.00 · $4,200.00 · £58.00</p>
+            </div>
+          </Card>
+          <ul className={styles.scale}>
+            {TYPE_SCALE.map(([token, size]) => (
+              <li key={token} className={styles.scaleRow}>
+                <span className="figures">{size}</span>
+                <span style={{ fontSize: `var(${token})` }}>Honey</span>
+              </li>
+            ))}
+          </ul>
+        </Specimen>
 
-/* component: one component's choice */
---nav-pill-width: 3.5rem;`}</code>
-        </pre>
-      </Specimen>
-
-      <Specimen
-        id="ds-colour"
-        title="Colour"
-        intro="Brand colours are for fills. Where one fails contrast as text, an accessible sibling does that job. Ratios are measured live from the tokens."
-      >
-        <ul className={styles.swatches}>
-          {SWATCHES.map((swatch) => (
-            <SwatchCard key={swatch.token} swatch={swatch} />
-          ))}
-        </ul>
-      </Specimen>
-
-      <Specimen
-        id="ds-type"
-        title="Type"
-        intro="Fraunces for moments, Inter for reading, IBM Plex Mono for every figure so columns of money line up."
-      >
-        <Card>
-          <div className={styles.typeFaces}>
-            <p className={styles.faceDisplay}>Every pound has a job.</p>
-            <p className={styles.faceUi}>
-              Seed money from the central jar into the jars that need it.
-            </p>
-            <p className="figures">£5,758.00 · $4,200.00 · £58.00</p>
+        <Specimen
+          id="ds-space"
+          level={3}
+          title="Space and shape"
+          principles={['details']}
+          intro="Calm and flat. A 4px rhythm, soft corners, and hairlines instead of shadows."
+        >
+          <div className={styles.spaceGrid}>
+            <ul className={styles.spaceList}>
+              {SPACE.map((step) => (
+                <li key={step} className={styles.spaceRow}>
+                  <span className="figures">{step * 4}px</span>
+                  <span className={styles.spaceBar} style={{ width: `var(--space-${step})` }} />
+                </li>
+              ))}
+            </ul>
+            <ul className={styles.radii}>
+              {RADII.map(([radius, name]) => (
+                <li key={radius}>
+                  <span
+                    className={styles.radiusBox}
+                    style={{ borderRadius: `var(--radius-${radius})` }}
+                  />
+                  <span className={styles.token}>{name}</span>
+                </li>
+              ))}
+            </ul>
           </div>
-        </Card>
-        <ul className={styles.scale}>
-          {TYPE_SCALE.map(([token, size]) => (
-            <li key={token} className={styles.scaleRow}>
-              <code className={styles.token}>{token}</code>
-              <span className="figures">{size}</span>
-              <span style={{ fontSize: `var(${token})` }}>Honey</span>
-            </li>
-          ))}
-        </ul>
-      </Specimen>
+        </Specimen>
 
-      <Specimen
-        id="ds-space"
-        title="Space and shape"
-        intro="A 4px grid. Hairline borders instead of shadows, as the brand guide asks."
+        <Specimen
+          id="ds-motion"
+          level={3}
+          title="Motion"
+          principles={['accessibility', 'data']}
+          intro="Movement explains a change and never decorates. Ask your device for less motion and changes simply arrive."
+        >
+          <MotionSpecimen />
+        </Specimen>
+      </Part>
+
+      <Part
+        id="ds-patterns"
+        title="Patterns"
+        intro="The same situation always looks and works the same way."
       >
-        <div className={styles.spaceGrid}>
-          <ul className={styles.spaceList}>
-            {SPACE.map((step) => (
-              <li key={step} className={styles.spaceRow}>
-                <code className={styles.token}>--space-{step}</code>
-                <span className={styles.spaceBar} style={{ width: `var(--space-${step})` }} />
+        <Specimen
+          id="ds-money"
+          level={3}
+          title="Money"
+          principles={['data', 'details']}
+          intro="The statement figure comes first. Every spend leads with what left the account, so it always matches the bank app."
+        >
+          <Card padding="dense">
+            <ul className={styles.moneyList}>
+              <li>
+                <span>Paid in dollars</span>
+                <span className={styles.moneyFigures}>
+                  <Money value={money(60_00, 'USD')} emphasis="strong" />
+                  <Money value={money(46_86, 'GBP')} />
+                  <ExchangeRate from="USD" to="GBP" rate={{ value: 0.781, kind: 'live' }} />
+                </span>
+              </li>
+              <li>
+                <span>Paid in pounds</span>
+                <span className={styles.moneyFigures}>
+                  <Money value={money(37_00, 'GBP')} emphasis="strong" />
+                  <Money value={money(50_00, 'USD')} />
+                  <ExchangeRate from="GBP" to="USD" rate={{ value: 1 / 0.74, kind: 'fixed' }} />
+                </span>
+              </li>
+            </ul>
+          </Card>
+          <div className={styles.rule}>
+            <p>
+              <strong>Conversions are conservative.</strong> Income converts at the rate that gives
+              less, spending at the rate that costs more. The rate is kept with each spend, so
+              history never shifts.
+            </p>
+          </div>
+        </Specimen>
+
+        <Specimen
+          id="ds-state"
+          level={3}
+          title="State"
+          principles={['accessibility']}
+          intro="Never colour alone. Every state is a word, an icon and a colour, and an empty track is a hatched shape."
+        >
+          <div className={styles.matrixCells}>
+            <Badge label="Neutral" />
+            <Badge label="Moss" tone="moss" />
+            <Badge label="Honey" tone="honey" />
+            <Badge label="Berry" tone="berry" />
+          </div>
+          <ul className={styles.states}>
+            {JAR_STATES.map(({ state, seeded, spent }) => (
+              <li key={state} className={styles.stateRow}>
+                <JarStateBadge state={state} />
+                <JarProgress state={state} seededRatio={seeded} spentRatio={spent} />
               </li>
             ))}
           </ul>
-          <ul className={styles.radii}>
-            {RADII.map((radius) => (
-              <li key={radius}>
-                <span
-                  className={styles.radiusBox}
-                  style={{ borderRadius: `var(--radius-${radius})` }}
-                />
-                <code className={styles.token}>--radius-{radius}</code>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </Specimen>
+          <div className={styles.stateRow}>
+            <span className={styles.token}>Empty</span>
+            <ProgressTrack layers={[]} pattern="hatched" />
+          </div>
+        </Specimen>
 
-      <Specimen id="ds-motion" title="Motion">
-        <MotionSpecimen />
-      </Specimen>
+        <Specimen
+          id="ds-button"
+          level={3}
+          title="Actions"
+          principles={['question', 'accessibility', 'architecture']}
+          intro="One button, not three. It changes emphasis and size, and always says what it does, even as just an icon."
+        >
+          <ButtonSpecimen />
+        </Specimen>
 
-      <Specimen
-        id="ds-button"
-        title="Button"
-        intro="One component. Variant sets emphasis, size sets scale, and content can be a label, an icon and a label, or an icon alone. An icon-only button still requires a label: it becomes the accessible name and the tooltip."
-      >
-        <ButtonSpecimen />
-      </Specimen>
-
-      <Specimen
-        id="ds-card"
-        title="Card"
-        intro="The brand card: 16px radius, 24px padding, one clay hairline."
-      >
-        <div className={styles.cards}>
-          <Card as="div">
-            <p className={styles.cardName}>default</p>
-            <p className={styles.note}>Warm ivory. Most content.</p>
+        <Specimen
+          id="ds-fields"
+          level={3}
+          title="Questions"
+          principles={['accessibility']}
+          intro="Labelled, explained and forgiving. Labels stay visible, errors say what to do, and phones never zoom in."
+        >
+          <Card>
+            <FieldSpecimen />
           </Card>
-          <Card as="div" variant="sunken">
-            <p className={styles.cardName}>sunken</p>
-            <p className={styles.note}>Parchment. Grouping inside a page.</p>
-          </Card>
-          <Card as="div" variant="highlight">
-            <p className={styles.cardName}>highlight</p>
-            <p className={styles.note}>A honey glow for the one thing that matters most.</p>
-          </Card>
-          <Card as="div" padding="dense">
-            <p className={styles.cardName}>padding=&quot;dense&quot;</p>
-            <p className={styles.note}>For lists.</p>
-          </Card>
-        </div>
-      </Specimen>
+        </Specimen>
 
-      <Specimen
-        id="ds-state"
-        title="Badges, tracks and jar states"
-        intro="Badge and ProgressTrack know nothing about budgets. JarStateBadge and JarProgress map a jar's state onto them, so every screen shows state the same way: a word, a shape and a colour."
-      >
-        <div className={styles.matrixCells}>
-          <Badge label="neutral" />
-          <Badge label="moss" tone="moss" />
-          <Badge label="honey" tone="honey" />
-          <Badge label="berry" tone="berry" />
-        </div>
-        <ul className={styles.states}>
-          {JAR_STATES.map(({ state, seeded, spent }) => (
-            <li key={state} className={styles.stateRow}>
-              <JarStateBadge state={state} />
-              <JarProgress state={state} seededRatio={seeded} spentRatio={spent} />
-            </li>
-          ))}
-        </ul>
-        <div className={styles.stateRow}>
-          <code className={styles.token}>pattern=&quot;hatched&quot;</code>
-          <ProgressTrack layers={[]} pattern="hatched" />
-        </div>
-      </Specimen>
+        <Specimen
+          id="ds-toast"
+          level={3}
+          title="Messages"
+          principles={['accessibility']}
+          intro="Messages wait for you. They pause while you read, errors stay until closed, and nothing important lives only in a message."
+        >
+          <ToastSpecimen />
+        </Specimen>
 
-      <Specimen
-        id="ds-nav"
-        title="Navigation"
-        intro="The active item wears a pill around its icon, a heavier label and aria-current. The pill has a fixed size, so it looks the same on a phone and a tablet. Items outside the demo add a small lock and say so to screen readers."
-      >
-        <div className={styles.navDemos}>
-          <nav aria-label="Tab bar example" className={styles.navTabDemo}>
-            <ul>
-              <li>
-                <NavItem href="/system" label="Design" icon={Palette} orientation="tab" />
-              </li>
-              <li>
-                <NavItem href="/system/notes" label="Notes" icon={BookOpen} orientation="tab" />
-              </li>
-            </ul>
-          </nav>
-          <nav aria-label="Side navigation example" className={styles.navSideDemo}>
-            <ul>
-              <li>
-                <NavItem href="/system" label="Design" icon={Palette} orientation="side" />
-              </li>
-              <li>
-                <NavItem href="/system/notes" label="Notes" icon={BookOpen} orientation="side" />
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </Specimen>
+        <Specimen
+          id="ds-card"
+          level={3}
+          title="Surfaces"
+          principles={['details']}
+          intro="A card holds one thing. Ivory for content, parchment to group, and a honey glow for what matters most."
+        >
+          <div className={styles.cards}>
+            <Card as="div">
+              <p className={styles.cardName}>Default</p>
+              <p className={styles.note}>Warm ivory. Most content.</p>
+            </Card>
+            <Card as="div" variant="sunken">
+              <p className={styles.cardName}>Sunken</p>
+              <p className={styles.note}>Parchment. Grouping inside a page.</p>
+            </Card>
+            <Card as="div" variant="highlight">
+              <p className={styles.cardName}>Highlight</p>
+              <p className={styles.note}>A honey glow for the one thing that matters most.</p>
+            </Card>
+            <Card as="div" padding="dense">
+              <p className={styles.cardName}>Dense</p>
+              <p className={styles.note}>For lists.</p>
+            </Card>
+          </div>
+        </Specimen>
 
-      <Specimen
-        id="ds-fields"
-        title="Fields"
-        intro="Every field has a visible label, a hint and error wired with aria-describedby, and 16px text so phones do not zoom."
-      >
-        <Card>
-          <FieldSpecimen />
-        </Card>
-      </Specimen>
+        <Specimen
+          id="ds-nav"
+          level={3}
+          title="Wayfinding"
+          principles={['accessibility', 'less']}
+          intro="You always know where you are. Places outside the demo stay visible and explain themselves."
+        >
+          <div className={styles.navDemos}>
+            <nav aria-label="Tab bar example" className={styles.navTabDemo}>
+              <ul>
+                <li>
+                  <NavItem
+                    href="/system/design-system"
+                    label="Design"
+                    icon={Palette}
+                    orientation="tab"
+                  />
+                </li>
+                <li>
+                  <NavItem href="/budget" label="Budget" icon={PiggyBank} orientation="tab" />
+                </li>
+                <li>
+                  <NavItem
+                    href="/settings"
+                    label="Settings"
+                    icon={Settings}
+                    orientation="tab"
+                    locked
+                  />
+                </li>
+              </ul>
+            </nav>
+            <nav aria-label="Side navigation example" className={styles.navSideDemo}>
+              <ul>
+                <li>
+                  <NavItem
+                    href="/system/design-system"
+                    label="Design"
+                    icon={Palette}
+                    orientation="side"
+                  />
+                </li>
+                <li>
+                  <NavItem href="/budget" label="Budget" icon={PiggyBank} orientation="side" />
+                </li>
+                <li>
+                  <NavItem
+                    href="/settings"
+                    label="Settings"
+                    icon={Settings}
+                    orientation="side"
+                    locked
+                  />
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </Specimen>
+      </Part>
 
-      <Specimen
-        id="ds-toast"
-        title="Toast"
-        intro="Transient toasts close after 3 seconds (--toast-duration) and pause while hovered or focused. Persistent ones stay until closed. Both can always be dismissed. Errors are announced assertively."
-      >
-        <ToastSpecimen />
-      </Specimen>
-
-      <Specimen
-        id="ds-jar"
-        title="Jar gauge"
-        intro="The brand's signature, drawn from the logo: a woven rim, a soft-shouldered body, a glint on the glass and a gently waving honey line."
-      >
-        <ul className={styles.jars}>
-          <li>
-            <JarGauge level={0.72} size="lg" label="Large jar, 72% full" />
-            <code className={styles.token}>lg</code>
-          </li>
-          <li>
-            <JarGauge level={0.35} size="md" label="Medium jar, 35% full" />
-            <code className={styles.token}>md</code>
-          </li>
-          <li>
-            <JarGauge level={0.6} size="sm" label="Small jar, 60% full" />
-            <code className={styles.token}>sm</code>
-          </li>
-        </ul>
-      </Specimen>
-
-      <Specimen
-        id="ds-money"
-        title="Money and rates"
-        intro="Every spend reads the same way, whatever it was paid in: the amount on the statement, the rate, and the equivalent in the other currency. When the equivalent is the base currency it is exactly what the jar was charged."
-      >
-        <Card padding="dense">
-          <ul className={styles.moneyList}>
+      <Part id="ds-signature" title="Signature" intro="The one thing only nestjar does.">
+        <Specimen
+          id="ds-jar"
+          level={3}
+          title="The jar"
+          principles={['data', 'question']}
+          intro="The brand mark becomes the gauge. Honey drains as money gets a job, so money still waiting for one is something you can see."
+        >
+          <ul className={styles.jars}>
             <li>
-              <span>Paid in dollars</span>
-              <span className={styles.moneyFigures}>
-                <Money value={money(60_00, 'USD')} emphasis="strong" />
-                <Money value={money(46_86, 'GBP')} />
-                <ExchangeRate from="USD" to="GBP" rate={{ value: 0.781, kind: 'live' }} />
-              </span>
+              <JarGauge level={0.72} size="lg" label="Large jar, 72% full" />
+              <span className={styles.token}>Large</span>
             </li>
             <li>
-              <span>Paid in pounds</span>
-              <span className={styles.moneyFigures}>
-                <Money value={money(37_00, 'GBP')} emphasis="strong" />
-                <Money value={money(50_00, 'USD')} />
-                <ExchangeRate from="GBP" to="USD" rate={{ value: 1 / 0.74, kind: 'fixed' }} />
-              </span>
+              <JarGauge level={0.35} size="md" label="Medium jar, 35% full" />
+              <span className={styles.token}>Medium</span>
+            </li>
+            <li>
+              <JarGauge level={0.6} size="sm" label="Small jar, 60% full" />
+              <span className={styles.token}>Small</span>
             </li>
           </ul>
-        </Card>
-      </Specimen>
+        </Specimen>
+      </Part>
     </div>
   );
 }

@@ -37,9 +37,10 @@
   color: var(--color-text-muted);
 }
 
+/* A fixed size, never full width, so the pill looks the same on a phone and a tablet. */
 .tab .pill {
-  width: var(--nav-pill-width);
-  height: var(--nav-pill-height);
+  width: 3.5rem;
+  height: 2rem;
 }
 
 .tab:hover .pill {

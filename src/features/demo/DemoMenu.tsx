@@ -73,7 +73,7 @@ export function DemoMenu({ tone = 'light' }: { readonly tone?: 'light' | 'dark' 
           <div className={styles.section}>
             <h3 className={styles.rowTitle}>How it is built</h3>
             <p className={styles.rowHint}>
-              The design system, and the decisions behind this prototype.
+              The design principles, and the design system that puts them into practice.
             </p>
             <Button
               href="/system"

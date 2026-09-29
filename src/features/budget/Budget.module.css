@@ -85,8 +85,8 @@
 }
 
 .centralLabel:focus-visible {
-  outline: 3px solid var(--color-focus);
-  outline-offset: 4px;
+  outline: var(--focus-ring-width) solid var(--color-focus);
+  outline-offset: calc(var(--focus-ring-offset) * 2);
 }
 
 .centralFigure {

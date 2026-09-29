@@ -88,17 +88,16 @@ The blueprint wizard is one route (`/plan/:step`) so its draft survives between 
 
 ## Styling
 
-Design tokens are CSS custom properties in three tiers, imported through `styles/tokens.css`:
+Styles are CSS custom properties in two files, imported by `styles/global.css`:
 
-| File                    | Holds                          | Example              |
-| ----------------------- | ------------------------------ | -------------------- |
-| `tokens/primitives.css` | Raw brand values               | `--honey-amber`      |
-| `tokens/semantic.css`   | What a value is for            | `--color-honey-text` |
-| `tokens/components.css` | A single component's decisions | `--button-height-sm` |
+| File         | Holds                                         | Example                                    |
+| ------------ | --------------------------------------------- | ------------------------------------------ |
+| `brand.css`  | The brand guide's raw values                  | `--honey-amber`                            |
+| `shared.css` | What components are meant to agree on, by job | `--color-honey-text`, `--focus-ring-width` |
 
-Modules read semantic and component tokens, never primitives, and never hard-code a colour. Components use CSS Modules. There is no CSS-in-JS runtime and no utility framework, so the stylesheet reads like the design system it is.
+Only `shared.css` reads `brand.css`. A value belongs in `shared.css` when other components should match it, even if one uses it today. A value only one component cares about stays in that component's module, as a local custom property when its variants change it (see `--button-height` in `Button.module.css`). Modules never hard-code a colour. There is no CSS-in-JS runtime and no utility framework, so the stylesheet reads like the design system it is.
 
-The Design notes page (`/system`) renders every token and primitive from the real code. When a primitive gains a variant, add it there.
+The Design System page (`/system/design-system`) renders the foundations and every primitive from the real code. When a primitive gains a variant, add it there.
 
 ## Testing
 

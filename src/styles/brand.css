@@ -1,9 +1,8 @@
 /*
- * Tier 1: primitives. The raw values from the nestjar brand guide (v1.2).
+ * Brand: the nestjar brand guide (v1.2) as values.
  *
- * Nothing outside src/styles/tokens reads these directly. They exist so the
- * semantic tier has one place to point at, and so a rebrand is a change here
- * rather than a hunt through every module.
+ * Only shared.css reads these. Components never do, so a rebrand is a change
+ * in this file rather than a hunt through every module.
  */
 
 :root {
@@ -46,15 +45,4 @@
   --family-fraunces: 'Fraunces Variable', 'Fraunces', Georgia, serif;
   --family-inter: 'Inter Variable', 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --family-plex-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
-
-  /* Scales */
-  --scale-4: 0.25rem;
-  --scale-8: 0.5rem;
-  --scale-12: 0.75rem;
-  --scale-16: 1rem;
-  --scale-20: 1.25rem;
-  --scale-24: 1.5rem;
-  --scale-32: 2rem;
-  --scale-40: 2.5rem;
-  --scale-48: 3rem;
 }

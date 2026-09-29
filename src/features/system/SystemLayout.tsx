@@ -3,11 +3,12 @@ import type { ReactNode } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { Button, PageHeading } from '@/ui';
 import { OnboardingLayout } from '../onboarding/OnboardingLayout';
+import { PRINCIPLES, type PrincipleId } from './principles';
 import styles from './System.module.css';
 
 const SECTIONS = [
-  { href: '/system', label: 'Design system' },
-  { href: '/system/notes', label: 'Prototype notes' },
+  { href: '/system', label: 'Design Principles' },
+  { href: '/system/design-system', label: 'Design System' },
 ] as const;
 
 /**
@@ -75,20 +76,63 @@ export function Specimen({
   id,
   title,
   intro,
+  principles,
+  level = 2,
   children,
 }: {
   readonly id: string;
   readonly title: string;
   readonly intro?: ReactNode;
+  /** The principles this part of the system puts into practice. */
+  readonly principles?: readonly PrincipleId[];
+  /** 3 when the block sits inside a Part. */
+  readonly level?: 2 | 3;
   readonly children: ReactNode;
 }) {
+  const Heading = level === 2 ? 'h2' : 'h3';
   return (
     <section className={styles.specimen} aria-labelledby={id}>
       <div className={styles.specimenHead}>
-        <h2 id={id} className={styles.specimenTitle}>
+        <Heading id={id} className={styles.specimenTitle}>
+          {title}
+        </Heading>
+        {intro && <p className={styles.specimenIntro}>{intro}</p>}
+        {principles && <PrinciplesApplied ids={principles} />}
+      </div>
+      {children}
+    </section>
+  );
+}
+
+function PrinciplesApplied({ ids }: { readonly ids: readonly PrincipleId[] }) {
+  const names = ids.map((id) => PRINCIPLES.find((principle) => principle.id === id)?.title ?? id);
+  return (
+    <p className={styles.principlesApplied}>
+      <span>{ids.length === 1 ? 'Principle Applied:' : 'Principles Applied:'}</span>{' '}
+      {names.join(', ')}
+    </p>
+  );
+}
+
+/** A chapter of the Design System page, grouping related blocks under one idea. */
+export function Part({
+  id,
+  title,
+  intro,
+  children,
+}: {
+  readonly id: string;
+  readonly title: string;
+  readonly intro: ReactNode;
+  readonly children: ReactNode;
+}) {
+  return (
+    <section className={styles.part} aria-labelledby={id}>
+      <div className={styles.partHead}>
+        <h2 id={id} className={styles.partTitle}>
           {title}
         </h2>
-        {intro && <p className={styles.specimenIntro}>{intro}</p>}
+        <p className={styles.partIntro}>{intro}</p>
       </div>
       {children}
     </section>

@@ -187,19 +187,19 @@ test('every stage reflows at 320 CSS pixels without horizontal scrolling', async
 test('the design notes sit beside the story and lead back to it', async ({ page }) => {
   await freshStart(page);
   await activate(page, page.getByRole('link', { name: 'Design notes' }));
-  await expectHeadingFocused(page, 'Design system');
+  await expectHeadingFocused(page, 'Design Principles');
   await expectNoAxeViolations(page);
 
-  await activate(page, page.getByRole('link', { name: 'Prototype notes' }));
-  await expectHeadingFocused(page, 'Prototype notes');
-  await expect(page.getByRole('link', { name: 'Prototype notes' })).toHaveAttribute(
+  await activate(page, page.getByRole('link', { name: 'Design System', exact: true }));
+  await expectHeadingFocused(page, 'Design System');
+  await expect(page.getByRole('link', { name: 'Design System', exact: true })).toHaveAttribute(
     'aria-current',
     'page',
   );
   await expectNoAxeViolations(page);
 
   await page.setViewportSize({ width: 320, height: 640 });
-  for (const path of ['/system', '/system/notes']) {
+  for (const path of ['/system', '/system/design-system']) {
     await page.goto(path);
     const overflow = await page.evaluate(
       () => document.documentElement.scrollWidth - document.documentElement.clientWidth,

@@ -1,7 +1,7 @@
 .track {
   position: relative;
   display: block;
-  height: var(--track-height);
+  height: 8px;
   border-radius: var(--radius-pill);
   background: var(--color-surface-sunken);
   overflow: hidden;
@@ -9,7 +9,7 @@
 
 /* A hairline edge plus a hatch: crisp at any zoom, and not colour alone. */
 .hatched {
-  background: var(--track-hatch), var(--color-surface);
+  background: var(--pattern-empty), var(--color-surface);
   box-shadow: inset 0 0 0 1px var(--color-border-strong);
 }
 

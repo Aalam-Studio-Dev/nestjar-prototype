@@ -1,8 +1,14 @@
 /*
- * Tier 2: semantic tokens. Named for the job, not the colour.
+ * Shared: the common language every component speaks, named for the job
+ * rather than the value.
  *
- * This is the tier screens and components read. Brand values are for fills
- * and decoration; the *-text variants are for words and control boundaries.
+ * A value belongs here when other components are meant to match it, even if
+ * only one uses it today: focus, touch targets, colour roles, the empty
+ * pattern. A value only one component cares about lives in that component's
+ * own module instead.
+ *
+ * Brand fills are for fills and decoration; the *-text variants are for words
+ * and control boundaries.
  */
 
 :root {
@@ -44,9 +50,12 @@
   --color-nav-text: var(--spruce-100);
   --color-nav-text-muted: var(--spruce-300);
 
-  /* Focus */
+  /* Focus. One ring everywhere, so anything that draws its own matches. */
   --color-focus: var(--deep-spruce);
   --color-focus-on-dark: var(--honey-amber);
+  --focus-ring-width: 3px;
+  --focus-ring-offset: 2px;
+  --focus-ring-radius: 4px;
 
   /* Typography */
   --font-display: var(--family-fraunces);
@@ -66,15 +75,15 @@
   --leading-normal: 1.5;
 
   /* Space (4px grid) */
-  --space-1: var(--scale-4);
-  --space-2: var(--scale-8);
-  --space-3: var(--scale-12);
-  --space-4: var(--scale-16);
-  --space-5: var(--scale-20);
-  --space-6: var(--scale-24);
-  --space-8: var(--scale-32);
-  --space-10: var(--scale-40);
-  --space-12: var(--scale-48);
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
 
   /* Shape */
   --radius-sm: 8px;
@@ -82,7 +91,7 @@
   --radius-lg: 16px;
   --radius-pill: 999px;
 
-  /* Layout */
+  /* Layout. Buttons and fields share the touch target, so they line up side by side. */
   --touch-target: 2.75rem; /* 44px minimum */
   --content-max: 45rem;
   --tab-bar-height: 4.5rem;
@@ -104,8 +113,21 @@
   --duration-base: 200ms;
   --duration-slow: 600ms;
 
+  /*
+   * Reading time, in plain milliseconds so the toast provider can read it.
+   * Reduced motion does not shorten it: time to read is not animation.
+   */
+  --toast-duration: 3000;
+
   /* The brand guide rules out drop shadows; sheets use a hairline lift only. */
   --elevation-sheet: 0 -1px 0 var(--color-border);
+
+  /* Empty is a shape as well as a colour, so it never relies on colour alone. */
+  --pattern-empty: repeating-linear-gradient(
+    -45deg,
+    var(--color-border) 0 3px,
+    transparent 3px 6px
+  );
 }
 
 @media (prefers-reduced-motion: reduce) {

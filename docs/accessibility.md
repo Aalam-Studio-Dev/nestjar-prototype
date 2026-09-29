@@ -37,7 +37,7 @@ Every interactive element is a native `<button>`, `<a>`, `<input>` or `<select>`
 
 ## Colour and contrast
 
-Brand colours are kept for fills and decoration. Where one failed AA for text or a control boundary, an accessible variant sits beside it in `tokens.css`.
+Brand colours are kept for fills and decoration. Where one failed AA for text or a control boundary, an accessible variant sits beside it in `brand.css`, and `shared.css` gives it the job.
 
 | Token                                  | Use                       | On          | Ratio  | Brand value it replaces       |
 | -------------------------------------- | ------------------------- | ----------- | ------ | ----------------------------- |
@@ -56,7 +56,7 @@ State is never shown by colour alone: jar states have a word and an icon as well
 - Mobile first. Everything reflows at 320 CSS pixels and at 400% zoom without horizontal scrolling.
 - Sizes are in `rem`, so text scales with browser settings.
 - Touch targets are at least 44 × 44 CSS pixels, except the compact currency toggle (40px), which still exceeds the 24px AA minimum. Small buttons keep a 44px hit area around a 36px face.
-- The Design notes page shows each semantic colour with its contrast ratio, measured live from the tokens.
+- The Design System page shows each colour role with its contrast ratio, measured live from the styles.
 - `scroll-padding` keeps focused fields clear of the sticky top bar and fixed bottom bars (2.4.11 Focus Not Obscured).
 - `prefers-reduced-motion` sets every duration token to zero, so the jar still changes level without animating.
 - `forced-colors` rules keep borders, indicators and the selected state visible in Windows High Contrast.
